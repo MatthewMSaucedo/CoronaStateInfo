@@ -1,6 +1,6 @@
 const express = require('express');
-const router = require('./router');
-const routeConstants = require('./routeConstants');
+const router = require('./routing/router');
+const routeConstants = require('./routing/routeConstants');
 
 const port = 3000;
 const app = express();
