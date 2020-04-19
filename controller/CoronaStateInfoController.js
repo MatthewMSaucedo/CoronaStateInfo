@@ -1,6 +1,6 @@
 module.exports = class CoronaStateInfoController {
-  static getHistoricalData(req, res) {
-    return res.status(200).json({ response: 'getHistoricalData works!' });
+  static async getHistoricalData(req, res) {
+    return res.status(200).send({ response: 'getInfectionRate works!' });
   }
 
   static getInfectionRate(req, res) {
