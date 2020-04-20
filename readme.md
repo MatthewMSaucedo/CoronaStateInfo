@@ -16,7 +16,7 @@
 
 ### **API**
 
-`(GET) getHistoricalData(state: string, daysBack: number): State` <br />
+`(GET) getHistoricalData(state: string, daysBack: number): StateCoronaInformation` <br />
 This endpoint returns the cumulative number of CoronaVirus cases and deaths for each day in the range of <br /> 
 `daysBack` to the time of calling the API.
 
