@@ -1,8 +1,8 @@
 const express = require('express');
 const routeConstants = require('./routeConstants');
-const CoronaStateInfoControllerClass = require('../controller/CoronaStateInfoController');
+const CoronaStateInfoController = require('../controller/CoronaStateInfoController');
 
-const coronaStateInfoController = new CoronaStateInfoControllerClass();
+const coronaStateInfoController = new CoronaStateInfoController();
 
 const router = express.Router();
 

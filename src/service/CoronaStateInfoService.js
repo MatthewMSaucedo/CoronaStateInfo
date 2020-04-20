@@ -9,7 +9,8 @@ module.exports = class CoronaStateInfoService {
     const stateCoronaInformation = {};
     stateCoronaInformation.name = state;
 
-    const stateCountyInfo = await NOVELCovidService.getStatesCountyCovidInfo(state, daysBack);
+    const stateCountyInfo = await this.novelCovidService.constructor
+      .getStatesCountyCovidInfo(state, daysBack);
     stateCoronaInformation.days = this.getStateDailyInfo(stateCountyInfo, daysBack);
 
     return stateCoronaInformation;
@@ -20,16 +21,16 @@ module.exports = class CoronaStateInfoService {
     const stateDailyInfo = {};
 
     // parse stateCountyInfo into stateDailyInfo
-    for (let j = 0; j < validDates.length; j += 1) {
-      const date = validDates[j];
-      for (let i = 0; i < stateCountyInfo.length; i += 1) {
-        if (i === 0) {
+    for (let dateIndex = 0; dateIndex < validDates.length; dateIndex += 1) {
+      const date = validDates[dateIndex];
+      for (let countyIndex = 0; countyIndex < stateCountyInfo.length; countyIndex += 1) {
+        if (countyIndex === 0) {
           stateDailyInfo[date] = {};
-          stateDailyInfo[date].cases = stateCountyInfo[i].timeline.cases[date];
-          stateDailyInfo[date].deaths = stateCountyInfo[i].timeline.deaths[date];
+          stateDailyInfo[date].cases = stateCountyInfo[countyIndex].timeline.cases[date];
+          stateDailyInfo[date].deaths = stateCountyInfo[countyIndex].timeline.deaths[date];
         } else {
-          stateDailyInfo[date].cases += stateCountyInfo[i].timeline.cases[date];
-          stateDailyInfo[date].deaths += stateCountyInfo[i].timeline.deaths[date];
+          stateDailyInfo[date].cases += stateCountyInfo[countyIndex].timeline.cases[date];
+          stateDailyInfo[date].deaths += stateCountyInfo[countyIndex].timeline.deaths[date];
         }
       }
     }
