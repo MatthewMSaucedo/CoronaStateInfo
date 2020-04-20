@@ -26,9 +26,6 @@ module.exports = class NOVELCovidService {
   static async getStatesCountyCovidInfo(state, daysBack) {
     const requestUrl = routeConstants.getStatesCountyCovidInfoRoute + state;
     const query = {};
-    const proxyInformation = {};
-    proxyInformation.host = '127.0.0.1';
-    proxyInformation.port = 3000;
     query.lastdays = daysBack;
 
     try {

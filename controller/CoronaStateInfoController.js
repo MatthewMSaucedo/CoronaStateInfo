@@ -1,6 +1,12 @@
+const CoronaStateInfoService = require('../service/CoronaStateInfoService');
+
 module.exports = class CoronaStateInfoController {
-  static async getHistoricalData(req, res) {
-    return res.status(200).send({ response: 'getHistoricalData works!' });
+  constructor() {
+    this.coronaStateInfoService = new CoronaStateInfoService();
+  }
+
+  async getHistoricalData(req, res) {
+    return res.status(200).send(await this.coronaStateInfoService.getHistoricalData('florida', 1));
   }
 
   static getInfectionRate(req, res) {
