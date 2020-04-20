@@ -1,5 +1,5 @@
 const express = require('express');
-const CoronaStateInfoApplication = require('./CoronaStateInfoApplication');
+const CoronaStateInfoApplication = require('./src/CoronaStateInfoApplication');
 
 const port = 3000;
 const app = express();
