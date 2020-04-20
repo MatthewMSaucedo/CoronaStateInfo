@@ -11,29 +11,31 @@ module.exports = class CoronaStateInfoService {
     const stateDailyInfo = {};
 
     // parse stateCountyInfo into stateDailyInfo
-    stateCountyInfo.forEach((stateCounty, i) => {
-      const date = validDates[i];
-      if (i === 0) {
-        stateDailyInfo[date] = {};
-        stateDailyInfo[date].cases += stateCounty.timeline.cases[date];
-        stateDailyInfo[date].deaths += stateCounty.timeline.deaths[date];
-      } else {
-        stateDailyInfo[date].cases += stateCounty.timeline.cases[date];
-        stateDailyInfo[date].deaths += stateCounty.timeline.deaths[date];
+    for (let j = 0; j < validDates.length; j += 1) {
+      const date = validDates[j];
+      for (let i = 0; i < stateCountyInfo.length; i += 1) {
+        if (i === 0) {
+          stateDailyInfo[date] = {};
+          stateDailyInfo[date].cases = stateCountyInfo[i].timeline.cases[date];
+          stateDailyInfo[date].deaths = stateCountyInfo[i].timeline.deaths[date];
+        } else {
+          stateDailyInfo[date].cases += stateCountyInfo[i].timeline.cases[date];
+          stateDailyInfo[date].deaths += stateCountyInfo[i].timeline.deaths[date];
+        }
       }
-    });
+    }
 
     console.log();
     return stateDailyInfo;
   }
 
   getDatesInRange(daysBack) {
-    const date = new Date();
     const datesInRange = [];
 
     for (let i = 1; i <= daysBack; i += 1) {
+      const date = new Date();
       date.setDate(date.getDate() - i);
-      datesInRange[i - 1] = this.getValidDateString(date);
+      datesInRange[i - 1] = this.constructor.getValidDateString(date);
     }
     return datesInRange;
   }

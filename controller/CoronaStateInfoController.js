@@ -6,7 +6,7 @@ module.exports = class CoronaStateInfoController {
   }
 
   async getHistoricalData(req, res) {
-    return res.status(200).send(await this.coronaStateInfoService.getHistoricalData('florida', 1));
+    return res.status(200).send(await this.coronaStateInfoService.getHistoricalData('florida', 2));
   }
 
   static getInfectionRate(req, res) {
