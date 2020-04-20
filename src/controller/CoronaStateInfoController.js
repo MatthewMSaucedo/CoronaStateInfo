@@ -25,8 +25,4 @@ module.exports = class CoronaStateInfoController {
       return res.status(500).json({ Error: exception.message });
     }
   }
-
-  static getInfectionRate(req, res) {
-    return res.status(200).json({ response: 'getInfectionRate works!' });
-  }
 };

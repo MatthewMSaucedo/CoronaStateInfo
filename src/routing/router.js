@@ -10,9 +10,5 @@ router.get(
   routeConstants.getHistoricalDataRoute,
   coronaStateInfoController.getHistoricalData.bind(coronaStateInfoController),
 );
-router.get(
-  routeConstants.getInfectionRateRoute,
-  CoronaStateInfoControllerClass.getInfectionRate,
-);
 
 module.exports = router;

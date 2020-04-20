@@ -10,9 +10,6 @@
         that is available by county to provide information <br />
         on CoronaVirus cases for the given State as a whole.
     </li>
-    <li>
-        Provide a means of calculating infection rate within any given state.
-    </li>
 </ul>
 
 <hr />
@@ -21,24 +18,26 @@
 
 `(GET) getHistoricalData(state: string, daysBack: number): State` <br />
 This endpoint returns the cumulative number of CoronaVirus cases and deaths for each day in the range of <br /> 
-`daysBack` to the time of calling the API. `daysBack` defaults to 30 if no value is received.
-
-`(GET) getInfectionRate(state: string, daysBack: number): number` <br />
-This endpoint returns the infections rate (infection/day) as a number, considering the range of time from <br />
-`daysBack` to the time of callign the API. `daysBack` defaults to 5 if no value is received.
+`daysBack` to the time of calling the API.
 
 <hr />
 
 ### **Models**
 
-```
-State {
+```Javascript
+StateCoronaInformation {
     name: string,
-    days: day[]
+    days: DailyCoronaInformation[]
+}
+
+DailyCoronaInformation {
+    mm/dd-1/yy: Day,
+    mm/dd-2/yy: Day,
+    ...
+    mm/dd-{daysBack}/yy: Day
 }
 
 Day {
-    date: string,
     cases: number,
     deaths: number
 }
@@ -54,8 +53,16 @@ To run this application, perform the following actions.
     <li>Run `npm run start`</li>
 </ul>
 
-This application will now be running locally. To query the endpoints, use the following urls:
+This application will now be running locally. To query the endpoint, use the following url:
 <ul><li>localhost:3000/coronastateinfo/gethistoricaldata</li>
-<li>localhost:3000/coronastateinfo/getinfectionrate</li></ul>
 
-Simply perform an HTTP GET request, with the request bodies detailed in the API section of this documentation.
+Simply perform an HTTP GET request, with the request body detailed in the API section of this documentation. A curl request would look like the following:
+
+```
+curl --location --request GET 'http://localhost:3000/coronastateinfo/gethistoricaldata' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"state": "florida",
+	"daysBack": 2
+}'
+```
