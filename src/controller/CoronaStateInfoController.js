@@ -6,7 +6,24 @@ module.exports = class CoronaStateInfoController {
   }
 
   async getHistoricalData(req, res) {
-    return res.status(200).send(await this.coronaStateInfoService.getHistoricalData('florida', 2));
+    const requestBody = req.body;
+
+    // ensure request body is valid
+    try {
+      this.coronaStateInfoService.validateRequestBody(requestBody);
+    } catch (exception) {
+      return res.status(400).json({ Error: exception.message });
+    }
+
+    // collect and return historical data
+    try {
+      const getHistoricalDataResponse = await this.coronaStateInfoService.getHistoricalData(
+        requestBody.state.toLowerCase(), requestBody.daysBack,
+      );
+      return res.status(200).send(getHistoricalDataResponse);
+    } catch (exception) {
+      return res.status(500).json({ Error: exception.message });
+    }
   }
 
   static getInfectionRate(req, res) {

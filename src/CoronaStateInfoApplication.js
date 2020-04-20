@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const router = require('./routing/router');
 const routeConstants = require('./routing/routeConstants');
 
@@ -8,10 +9,12 @@ module.exports = class CoronaStateInfoApplication {
   }
 
   run() {
-    // expose application at specified port
     this.app.listen(
       this.port, () => console.log(`CoronaStateInfoApplication listening at http://localhost:${this.port}`),
     );
+
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
 
     return this.app.use(routeConstants.baseApiRoute, router);
   }

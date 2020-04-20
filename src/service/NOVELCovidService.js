@@ -31,9 +31,8 @@ module.exports = class NOVELCovidService {
     try {
       const getStatesCountyCovidInfoResponse = await axios.get(requestUrl, { params: query });
       return getStatesCountyCovidInfoResponse.data;
-    } catch (error) {
-      console.log(error);
-      throw error;
+    } catch (exception) {
+      throw new Error(`NOVELCovid API failed with response: ${exception.message}`);
     }
   }
 };
