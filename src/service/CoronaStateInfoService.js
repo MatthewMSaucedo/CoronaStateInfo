@@ -1,8 +1,6 @@
-const NOVELCovidService = require('./NOVELCovidService');
-
 module.exports = class CoronaStateInfoService {
-  constructor() {
-    this.novelCovidService = new NOVELCovidService();
+  constructor(novelCovidService) {
+    this.novelCovidService = novelCovidService;
   }
 
   async getHistoricalData(state, daysBack) {

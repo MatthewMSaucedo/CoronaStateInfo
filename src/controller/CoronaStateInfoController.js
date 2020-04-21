@@ -1,8 +1,6 @@
-const CoronaStateInfoService = require('../service/CoronaStateInfoService');
-
 module.exports = class CoronaStateInfoController {
-  constructor() {
-    this.coronaStateInfoService = new CoronaStateInfoService();
+  constructor(coronaStateInfoService) {
+    this.coronaStateInfoService = coronaStateInfoService;
   }
 
   async getHistoricalData(req, res) {
